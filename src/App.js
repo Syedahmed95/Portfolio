@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Header from "./UI/Header"
+import ExpAndSKills from "./UI/ExpAndSkills";
+import Features from "./UI/Features";
+import { useState } from "react";
+import Bottom from "./UI/Bottom";
 function App() {
+  const [headerAnimationState, setHeaderAnimationState] = useState({ animationStart: false })
+  const [bottomAnimationStart, setbottomAnimationStart] = useState({ animationStart: false })
+  const animationCheck = (animationComplete) => {
+    setHeaderAnimationState({ animationStart: animationComplete })
+  }
+  const animationEnd = (animationComplete) => {
+    setbottomAnimationStart({ animationStart: animationComplete })
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header animationCheck={animationCheck}></Header>
+      <ExpAndSKills animationStart={headerAnimationState}></ExpAndSKills>
+      <Features animationEnd={animationEnd}></Features>
+      <Bottom bottomAnimationStart={bottomAnimationStart}></Bottom>
+    </>
   );
 }
 
